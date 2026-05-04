@@ -17,8 +17,7 @@ print: $a
 ['hello']
 ```
 
-## Installing
-
+## Installing
 ```bash
 pip install sedu-parse
 ```
