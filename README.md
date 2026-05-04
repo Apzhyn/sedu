@@ -18,6 +18,7 @@ print: $a
 ```
 
 ## Building
+
 You will need Cargo and pip.
 ```python
 pip install maturin
