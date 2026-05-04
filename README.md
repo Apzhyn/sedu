@@ -13,12 +13,9 @@ print: $a
 ```
 
 ## Output
-```
-['hello']
-```
+```['hello']```
 
 ## Building
-
 You will need Cargo and pip.
 ```python
 pip install maturin
