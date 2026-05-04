@@ -3,7 +3,7 @@ requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "sedu"
+name = "sedu-parse"
 version = "0.1.0"
 description = "super evil data unitist"
 requires-python = ">=3.8"
