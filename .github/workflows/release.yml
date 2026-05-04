@@ -6,8 +6,8 @@ on:
       - "v*"
 
 jobs:
-  build:
-    name: Build wheels
+  build-wheels:
+    name: Build wheels (manylinux)
     runs-on: ubuntu-latest
 
     steps:
@@ -17,9 +17,11 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           command: build
-          args: --release --compatibility manylinux2014
+          args: >
+            --release
+            --compatibility manylinux2014
 
-      - name: Upload artifacts
+      - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
           name: wheels
@@ -27,17 +29,21 @@ jobs:
 
   publish:
     name: Publish to PyPI
-    needs: build
+    needs: build-wheels
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download wheels
+        uses: actions/download-artifact@v4
         with:
           name: wheels
           path: dist
 
-      - name: Publish
+      - name: Publish to PyPI
         uses: PyO3/maturin-action@v1
         with:
           command: publish
-          args: --username __token__ --password ${{ secrets.PYPI_TOKEN }} --skip-existing
+          args: >
+            --username __token__
+            --password ${{ secrets.PYPI_TOKEN }}
+            --skip-existing
