@@ -67,7 +67,7 @@ fn run_sedu(input: String) -> Vec<String> {
 }
 
 #[pymodule]
-fn sedu_parse(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn sedu-parse(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(run_sedu, m)?)?;
     Ok(())
 }
