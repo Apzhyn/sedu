@@ -7,19 +7,23 @@ on:
 
 jobs:
   build-wheels:
-    name: Build wheels (manylinux)
+    name: Build manylinux wheels
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build wheels
-        uses: PyO3/maturin-action@v1
-        with:
-          command: build
-          args: >
-            --release
-            --compatibility manylinux2014
+      - name: Set up Docker
+        run: docker version
+
+      - name: Build wheels in manylinux container
+        run: |
+          docker run --rm -v $PWD:/io quay.io/pypa/manylinux2014_x86_64 bash -c "
+            set -e &&
+            cd /io &&
+            /opt/python/cp311-cp311/bin/pip install maturin &&
+            /opt/python/cp311-cp311/bin/maturin build --release --compatibility manylinux2014
+          "
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
