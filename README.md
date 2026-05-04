@@ -13,14 +13,18 @@ print: $a
 ```
 
 ## Output
-```['hello']```
+```
+['hello']
+```
 
-## Building
+## Building
 
 You will need Cargo and pip.
-```python
+
+```bash
 pip install maturin
 ```
-```python
+
+```bash
 maturin build --release
 ```
