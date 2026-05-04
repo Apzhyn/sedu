@@ -13,16 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Docker
-        run: docker version
-
       - name: Build wheels in manylinux container
         run: |
           docker run --rm -v $PWD:/io quay.io/pypa/manylinux2014_x86_64 bash -c "
-            set -e &&
-            cd /io &&
-            /opt/python/cp311-cp311/bin/pip install maturin &&
-            /opt/python/cp311-cp311/bin/maturin build --release --compatibility manylinux2014
+            set -e
+
+            cd /io
+
+            curl https://sh.rustup.rs -sSf | sh -s -- -y
+            export PATH=\$HOME/.cargo/bin:\$PATH
+
+            /opt/python/cp311-cp311/bin/pip install maturin
+
+            /opt/python/cp311-cp311/bin/maturin build \
+              --release \
+              --compatibility manylinux2014
           "
 
       - name: Upload wheels
