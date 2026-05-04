@@ -17,6 +17,12 @@ print: $a
 ['hello']
 ```
 
+## Installing
+
+```bash
+pip install sedu-parse
+```
+
 ## Building
 
 You will need Cargo and pip.
